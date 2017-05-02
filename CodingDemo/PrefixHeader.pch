@@ -1,0 +1,168 @@
+//
+//  PrefixHeader.pch
+//  CodingDemo
+//
+//  Created by Dylan.Wei on 16/8/31.
+//  Copyright © 2016年 Dylan.Wei. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+//手机版地址
+#define kBaseUrlStr_Phone @"https://m.coding.net/"
+
+//Coding App 的专属链接
+#define kCodingAppScheme @"coding-net:"
+
+//版本号
+#define kVersion_Coding [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+#define kVersionBuild_Coding [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
+
+//百度定位
+#define kBaiduGeotableId @""
+#define kBaiduAK @""
+#define kBaiduSK @""
+
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#endif
+
+#import "BaseNavigationController.h"
+#import "BaseViewController.h"
+
+#import "Masonry.h"
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
+#import "TFHpple.h"
+#import "TFHppleElement.h"
+#import "SDCAlertController.h"
+#import "BlocksKit+UIKit.h"
+#import "JDStatusBarNotification.h"
+#import "ReactiveCocoa.h"
+#import "NYXImagesKit.h"
+#import "XHRealTimeBlur.h"
+#import "RegexKitLite.h"
+#import "ODRefreshControl.h"
+#import "SVPullToRefresh.h"
+
+
+#import "NSString+Emojize.h"
+#import "NSString+Attribute.h"
+#import "NSMutableString+Common.h"
+#import "UIColor+expanded.h"
+#import "UITapImageView.h"
+#import "UIBarButtonItem+Common.h"
+#import "NSObject+Common.h"
+#import "PhoneCodeButton.h"
+#import "NSString+Common.h"
+#import "UIButton+Bootstrap.h"
+#import "UIButton+Common.h"
+#import "NSObject+ObjectMap.h"
+#import "UIView+Common.h"
+#import "UIImage+Common.h"
+#import "UITableView+Common.h"
+#import "UIView+Frame.h"
+#import "NSURL+Common.h"
+#import "NSDate+convenience.h"
+#import "NSDate+Common.h"
+#import "UISearchBar+Common.h"
+#import "UILabel+Common.h"
+#import "UIActionSheet+Common.h"
+
+//静态广告
+#define ImgUrlString1 @"http://d.hiphotos.baidu.com/image/pic/item/14ce36d3d539b60071473204e150352ac75cb7f3.jpg"
+//动态广告
+#define ImgUrlString2 @"http://c.hiphotos.baidu.com/image/pic/item/d62a6059252dd42a6a943c180b3b5bb5c8eab8e7.jpg"
+//颜色
+#define kLinkAttributes     @{(__bridge NSString *)kCTUnderlineStyleAttributeName : [NSNumber numberWithBool:NO],(NSString *)kCTForegroundColorAttributeName : (__bridge id)[UIColor colorWithHexString:@"0x3bbd79"].CGColor}
+#define kLinkAttributesActive       @{(NSString *)kCTUnderlineStyleAttributeName : [NSNumber numberWithBool:NO],(NSString *)kCTForegroundColorAttributeName : (__bridge id)[[UIColor colorWithHexString:@"0x1b9d59"] CGColor]}
+#define RandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]
+#define kColorTableSectionBg [UIColor colorWithHexString:@"0xeeeeee"]
+#define kColorTableBG [UIColor colorWithHexString:@"0xfafafa"]
+#define kTaskPrioritiesDisplay @[@"有空再看", @"正常处理", @"优先处理", @"十万火急"]
+
+//获取屏幕尺寸
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000 // 当前Xcode支持iOS8及以上
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)
+#define SCREENH_HEIGHT ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)
+#define SCREEN_SIZE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)
+#define SCREENWITHSCALE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width) / 414
+#define SCREENHEIGHTSCALE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height) / 736
+
+#else
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define SCREEN_SIZE [UIScreen mainScreen].bounds.size
+#define SCREENWITHSCALE [UIScreen mainScreen].bounds.size.width / 414
+#define SCREENHEIGHTSCALE [UIScreen mainScreen].bounds.size.height / 736
+#endif
+
+
+#define kDevice_Is_iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+#define kDevice_Is_iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+#define kDevice_Is_iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+#define kDevice_Is_iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define kScaleFrom_iPhone5_Desgin(_X_) (_X_ * (SCREEN_WIDTH/320))
+
+//弱引用和强引用
+#define kWeakSelf(type)  __weak typeof(type) weak##type = type;
+#define kStrongSelf(type)  __strong typeof(type) type = weak##type;
+//log输出
+#ifdef DEBUG
+#define kLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+#else
+#define kLog(...)
+#endif
+//控件
+#define kKeyWindow [UIApplication sharedApplication].keyWindow
+#define kTipAlert(_S_, ...)     [[[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:(_S_), ##__VA_ARGS__] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil] show]
+//尺寸
+#define kNavTitleFontSize 18
+#define kPaddingLeftWidth 15.0
+#define kLoginPaddingLeftWidth 18.0
+//project
+#define kUnReadKey_messages @"messages"
+#define kUnReadKey_notifications @"notifications"
+#define kUnReadKey_project_update_count @"project_update_count"
+#define kUnReadKey_notification_AT @"notification_at"
+#define kUnReadKey_notification_Comment @"notification_comment"
+#define kUnReadKey_notification_System @"notification_system"
+
+#define  kBadgeTipStr @"badgeTip"
+#define kDefaultLastId [NSNumber numberWithInteger:99999999]
+
+#define kPlaceholderMonkeyRoundWidth(_width_) [UIImage imageNamed:[NSString stringWithFormat:@"placeholder_monkey_round_%.0f", _width_]]
+#define kPlaceholderMonkeyRoundView(_view_) [UIImage imageNamed:[NSString stringWithFormat:@"placeholder_monkey_round_%.0f", CGRectGetWidth(_view_.frame)]]
+
+#define kPlaceholderCodingSquareWidth(_width_) [UIImage imageNamed:[NSString stringWithFormat:@"placeholder_coding_square_%.0f", _width_]]
+#define kPlaceholderCodingSquareView(_view_) [UIImage imageNamed:[NSString stringWithFormat:@"placeholder_coding_square_%.0f", CGRectGetWidth(_view_.frame)]]
+
+
+
+
+///=============================================
+/// @name Weak Object
+///=============================================
+#pragma mark - Weak Object
+#define ESWeak(var, weakVar) __weak __typeof(&*var) weakVar = var
+#define ESStrong_DoNotCheckNil(weakVar, _var) __typeof(&*weakVar) _var = weakVar
+#define ESStrong(weakVar, _var) ESStrong_DoNotCheckNil(weakVar, _var); if (!_var) return;
+
+#define ESWeak_(var) ESWeak(var, weak_##var);
+#define ESStrong_(var) ESStrong(weak_##var, _##var);
+
+/** defines a weak `self` named `__weakSelf` */
+#define ESWeakSelf      ESWeak(self, __weakSelf);
+/** defines a strong `self` named `_self` from `__weakSelf` */
+#define ESStrongSelf    ESStrong(__weakSelf, _self);
+
+#endif /* PrefixHeader_pch */
